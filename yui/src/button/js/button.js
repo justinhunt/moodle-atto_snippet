@@ -61,6 +61,16 @@ var FIELDTEMPLATE = '' +
         '<div id="{{elementid}}_{{innerform}}" class="mdl-align">{{snippetvar}}' +
             '&nbsp;<input type="text" class="' + CSS.TEMPLATEVARIABLE + '_{{variableindex}}" value="{{defaultvalue}}"></input>' +
         '</div>';
+        
+var SELECTCONTAINERTEMPLATE = '' +
+            '<div id="{{elementid}}_{{innerform}}" class="mdl-align">{{variable}}</div>';
+			
+var SELECTTEMPLATE = '' +
+            '<select class="' + CSS.TEMPLATEVARIABLE + '_{{variableindex}} atto_snippet_field"></select>';
+
+var OPTIONTEMPLATE ='' +
+		'<option value="{{option}}">{{option}}</option>';
+
 
 var SUBMITTEMPLATE = '' +
   '<form class="atto_form">' +
@@ -251,14 +261,45 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
 
     	 Y.Array.each(thevariables, function(thevariable, currentindex) { 	 
             //loop start
+
+			if((thevariable in defaultsarray) && defaultsarray[thevariable].indexOf('|')>-1){
+			
+				var containertemplate = Y.Handlebars.compile(SELECTCONTAINERTEMPLATE),
+					content = Y.Node.create(containertemplate({
+					elementid: this.get('host').get('elementid'),
+					variable: thevariable,
+					defaultvalue: defaultsarray[thevariable],
+					variableindex: currentindex
+				}));
+			
+				var selecttemplate = Y.Handlebars.compile(SELECTTEMPLATE),
+					selectbox = Y.Node.create(selecttemplate({
+					variable: thevariable,
+					defaultvalue: defaultsarray[thevariable],
+					variableindex: currentindex
+				}));
+			
+				var opts = defaultsarray[thevariable].split('|');
+				var htmloptions="";
+				var opttemplate = Y.Handlebars.compile(OPTIONTEMPLATE);
+				Y.Array.each(opts, function(opt, optindex) {
+					var optcontent = Y.Node.create(opttemplate({
+							option: opt
+						}));
+					selectbox.appendChild(optcontent);
+				});
+				content.appendChild(selectbox);
+				
+			}else{
       
-             var template = Y.Handlebars.compile(FIELDTEMPLATE),
-            	content = Y.Node.create(template({
-            	elementid: this.get('host').get('elementid'),
-                snippetvar: thevariable,
-                defaultvalue: defaultsarray[thevariable],
-                variableindex: currentindex
-            }));
+				 var template = Y.Handlebars.compile(FIELDTEMPLATE),
+					content = Y.Node.create(template({
+					elementid: this.get('host').get('elementid'),
+					snippetvar: thevariable,
+					defaultvalue: defaultsarray[thevariable],
+					variableindex: currentindex
+				}));
+            }//end of if | char
             allcontent.push(content);
             //loop end
         }, this);

@@ -32,6 +32,8 @@ $settings = new admin_settingpage('atto_snippet_settings', new lang_string('sett
 if ($ADMIN->fulltree) {
 	// An option setting
 	for($i=1;$i<ATTO_SNIPPET_COUNT+1;$i++){
+		$settings->add(new admin_setting_heading('atto_snippet/snippetheading_' . $i, 
+			get_string('snippet', 'atto_snippet') . ' ' . $i, ''));
 		$settings->add(new admin_setting_configtext('atto_snippet/snippetname_' . $i,
 			get_string('snippetname', 'atto_snippet') . ' ' . $i , '', '', PARAM_TEXT));
 		$settings->add(new admin_setting_configtextarea('atto_snippet/snippet_' . $i,
