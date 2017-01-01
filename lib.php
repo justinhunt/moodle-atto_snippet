@@ -60,6 +60,7 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
     $allsnippets=array();
     $allsnippetnames=array();
     $allvariables = array();
+    $allinstructions = array();
 
     //put our template into a form thats easy to process in JS
     for($snippetindex=1;$snippetindex<ATTO_SNIPPET_COUNT+1;$snippetindex++) {
@@ -70,6 +71,7 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
         $allsnippetnames[]=$snippets['snippetname_' . $snippetindex];
         $allvariables[] = atto_snippet_fetch_variables($snippets['snippet_' . $snippetindex]);
         $alldefaults[]=atto_snippet_fetch_default_properties($snippets['defaults_' . $snippetindex]);
+		$allinstructions[] = rawurlencode($snippets['snippetinstructions_' . $snippetindex]);
     }
 
 	//If they don't have permission don't show it
@@ -84,6 +86,7 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
     $params['snippetnames']= $allsnippetnames;
     $params['snippetvars']= $allvariables;
     $params['defaults']= $alldefaults;
+    $params['instructions']= $allinstructions;
 
     return $params;
 }
@@ -95,7 +98,8 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
  */
 function atto_snippet_fetch_variables($snippet){
 	$matches = array();
-	$t = preg_match_all('/@@(.*?)@@/s', $snippet, $matches);
+	//$t = preg_match_all('/{{(.*?)}}/s', $snippet, $matches);
+	$t = preg_match_all('/{{(.*?)}}/s', $snippet, $matches);
 	if(count($matches)>1){
 		return($matches[1]);
 	}else{

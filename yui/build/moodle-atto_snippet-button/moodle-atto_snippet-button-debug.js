@@ -41,12 +41,14 @@ var CSS = {
         INPUTCANCEL: 'atto_media_urlentrycancel',
         KEYBUTTON: 'atto_snippet_snippetbutton',
         HEADERTEXT: 'atto_snippet_headertext',
+        INSTRUCTIONSTEXT: 'atto_snippet_instructionstext',
         TEMPLATEVARIABLE: 'atto_snippet_snippetvariable',
     };
 
 var FIELDSHEADERTEMPLATE = '' +
         '<div id="{{elementid}}_{{innerform}}" class="mdl-align">' +
             '<h4 class="' + CSS.HEADERTEXT + '">{{headertext}} {{snippetname}}</h4>' +
+            '<div class="' + CSS.INSTRUCTIONSTEXT + '">{{instructions}}</div>' +
         '</div>';
 
 var BUTTONSHEADERTEMPLATE = '' +
@@ -115,7 +117,7 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
 
 
      /**
-     * Display the snippet Recorder files.
+     * Display the snippet buttons dialog
      *
      * @method _displayDialogue
      * @private
@@ -186,6 +188,8 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
 
         //get fields , 1 per variable
         var fields = this._getSnippetFields(snippetindex);
+        var instructions = this.get('instructions')[snippetindex];
+            instructions = decodeURIComponent(instructions);
 	
 		//get header node. It will be different if we have no fields
 		if(fields && fields.length>0){
@@ -196,7 +200,8 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
 		var template = Y.Handlebars.compile(FIELDSHEADERTEMPLATE),
             	content = Y.Node.create(template({
                 snippetname: this.get('snippetnames')[snippetindex],
-                headertext: useheadertext
+                headertext: useheadertext,
+                instructions: instructions
             }));
         var header = content;
 		
@@ -350,21 +355,37 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
             focusAfterHide: null
         }).hide();
         
+        var retcontent = '';
         var retstring = this.get('snippets')[snippetindex];
         var thesnippetname = this.get('snippetnames')[snippetindex];
         var thevariables=this.get('snippetvars')[snippetindex];
         
-        //add variables to return string
+        //Do the merge (old way)
          Y.Array.each(thevariables, function(variable, currentindex) {
-        //loop start
         	var thefield = Y.one('.' + CSS.TEMPLATEVARIABLE + '_' + currentindex);
         	var thevalue = thefield.get('value');
-        	retstring = retstring.replace('@@' + variable + '@@',thevalue);
-        //loop end
+        	retstring = retstring.replace('{{' + variable + '}}',thevalue);
         }, this);
-
+        retcontent = retstring;
+        
+        
+        /*
+        //Do the merge th YUI way
+        var mergevars={};
+          Y.Array.each(thevariables, function(variable, currentindex) {
+        	var thefield = Y.one('.' + CSS.TEMPLATEVARIABLE + '_' + currentindex);
+        	var thevalue = thefield.get('value');
+        	mergevars[variable] = thevalue;
+        }, this);
+        var template = Y.Handlebars.compile(retstring),
+            	content = Y.Node.create(template(mergevars));
+		retcontent = content;
+		//fails here because the retcontent is a YUI node and tostring delivers garbage
+		//all the data is nested
+		*/
+		
         this.editor.focus();
-        this.get('host').insertContentAtFocusPoint(retstring);
+        this.get('host').insertContentAtFocusPoint(retcontent);
         this.markUpdated();
 
     }
@@ -384,6 +405,9 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
     defaults: {
         value: null
     },
+    instructions: {
+        value: null
+    }
  }
 });
 

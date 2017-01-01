@@ -36,6 +36,16 @@ $string['nofieldsheader'] = 'Insert : ';
 $string['chooseinsert'] = 'What do you want to insert?';
 $string['snippet'] = 'Snippet';
 $string['snippetname'] = 'Snippet name';
-$string['defaults'] = 'Defaults';
+$string['snippetinstructions'] = 'Snippet instructions';
+$string['snippetkey'] = 'Snippet key';
+$string['snippetversion'] = 'Snippet version';
+$string['defaults'] = 'Snippet defaults';
+$string['bundle'] = 'Bundle';
+$string['snippetcount'] = 'Snippet count';
+$string['snippetcount_desc'] = '';
+$string['presets'] = 'Presets';
+$string['presets_desc'] = '';
+$string['snippetpageheading'] = '{$a}';
+$string['generalsettings'] = 'General settings';
 
 
