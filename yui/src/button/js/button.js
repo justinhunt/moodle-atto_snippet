@@ -365,10 +365,10 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
         	retstring = retstring.replace('{{' + variable + '}}',thevalue);
         }, this);
         retcontent = retstring;
-        
-        
+ 
+
+        //Do the merge the YUI way
         /*
-        //Do the merge th YUI way
         var mergevars={};
           Y.Array.each(thevariables, function(variable, currentindex) {
         	var thefield = Y.one('.' + CSS.TEMPLATEVARIABLE + '_' + currentindex);
@@ -377,11 +377,17 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
         }, this);
         var template = Y.Handlebars.compile(retstring),
             	content = Y.Node.create(template(mergevars));
-		retcontent = content;
-		//fails here because the retcontent is a YUI node and tostring delivers garbage
-		//all the data is nested
-		*/
-		
+        //fails here because the retcontent is a YUI node and tostring delivers garbage
+		//all the data is nested.
+		//this only works for text content
+        retcontent = content._node.data;
+		//this doesn't really work
+        var nodelist = content.get('childNodes');
+        nodelist.each(function (aNode) {
+			retcontent = retcontent + aNode.getHTML();
+			});
+			*/
+	
         this.editor.focus();
         this.get('host').insertContentAtFocusPoint(retcontent);
         this.markUpdated();

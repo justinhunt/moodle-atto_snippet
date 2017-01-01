@@ -98,10 +98,30 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
  */
 function atto_snippet_fetch_variables($snippet){
 	$matches = array();
-	//$t = preg_match_all('/{{(.*?)}}/s', $snippet, $matches);
 	$t = preg_match_all('/{{(.*?)}}/s', $snippet, $matches);
+	//this was for the handlebars support, but dropped it, couldn't make it work
 	if(count($matches)>1){
-		return($matches[1]);
+		//this was for the handlebars support, but dropped it, couldn't make it work
+		/*
+		$retmatches[] =array();
+		foreach($matches[1] as $match){
+			if(strpos($match,'/')===0 || $match=='this' || $match=="." || trim($match)==''){
+				continue;
+			}elseif(strpos($match,'#')===0){
+				$matcharray = explode(' ',$match);
+				if(count($matcharray)>1){
+					$match=$matcharray[1];
+				}else{
+					$match=str_replace('#','',$match);
+				}
+			}
+			if(!empty($match)){
+				$retmatches[] =$match;
+			}
+		}
+		return($retmatches);
+		*/
+		return $matches[1];
 	}else{
 		return array();
 	}
