@@ -16,9 +16,13 @@ Before the Snippet icon will be visible in the Atto toolbar you will need to vis
 
 Usage
 =====
-In the plugin's admin settings, site admin -> plugins -> text editors -> atto -> snippet, enter a name for the snippet, the content of the snippet and any default variable values. Variables can be used in the snippet content and are surrounded by {{ or }} marks. Like this: {{bigvariable}}
+To use a snippet, look for the blue cloud icon (its sooo cool) on the text editor. Feel free to submit a cooler icon. Checking on that should open the Snippet dialog with a button for each snippet.
+
+To make a snippet, find an empty snippet template page in the plugin's admin settings, site admin -> plugins -> text editors -> atto -> Snippet(Atto) -> Snippets. Enter a name for the snippet, the content of the snippet and any default variable values. Variables can be used in the snippet content and are surrounded by {{ or }} marks. Like this: {{bigvariable}}
 
 An example of a full snippet would be:
+
+============================
 Snippet Name
 sweety
 
@@ -27,6 +31,10 @@ My sweet food on {{weekday}} is: {{mysweety}}
 
 Defaults
 mysweety=candy,weekday=Monday
+============================
+
+If you run out of blank snippet templates, you can always create more. Set the number of snippets on the general settings page.
+site admin -> plugins -> text editors -> atto -> Snippet(atto) -> General Settings 
 
 Presets
 ======
