@@ -93,7 +93,7 @@ public static function fetch_snippet_pages($conf){
 			$settings_page->add(new \admin_setting_configtextarea('atto_snippet/defaults_' . $sindex,
 				get_string('defaults', 'atto_snippet'), '', '', PARAM_RAW));
 			$settings_page->add(new \admin_setting_configtext('atto_snippet/snippetversion_' . $sindex,
-				get_string('snippetversion', 'atto_snippet') . ' ' . $sindex , '', '', PARAM_TEXT));
+				get_string('snippetversion', 'atto_snippet') . ' ' . $sindex , '', '1.0.0', PARAM_TEXT));
               
 			$pages[] = $settings_page;
 		}

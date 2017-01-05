@@ -57,7 +57,7 @@ var BUTTONSHEADERTEMPLATE = '' +
         '</div>';
         
 var BUTTONTEMPLATE = '' +
-        '<div id="{{elementid}}_{{innerform}}" class="mdl-align">' +
+        '<div id="{{elementid}}_{{innerform}}" class="atto_snippet_buttons mdl-align">' +
             '<button class="' + CSS.KEYBUTTON + '_{{snippetindex}}">{{snippetname}}</button>' +
         '</div>';
 

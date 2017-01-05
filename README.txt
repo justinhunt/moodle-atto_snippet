@@ -1,7 +1,7 @@
 Snippet Plugin for Moodle Atto
 ===
 
-This is another template solution for Moodle content creation. Templates and variables(placeholders) are declared in the admin settings for the plugin. When the icon is click on the Atto editor, the user can choose the template and the values for each of the variables. The placeholders and template are then merged to create the final content which is then inserted on the page.
+This is a template solution for Moodle content creation. Templates and variables(placeholders) are declared in the admin settings for the plugin. When the icon is click on the Atto editor, the user can choose the template and the values for each of the variables. The placeholders and template are then merged to create the final content which is then inserted on the page.
 
 Unlike the Generico and PoodLL Atto plugins, this has no filter companion and returns html directly to the text area. This is useful when the content author doesn't need tricky CSS or javascript, and has the benefit that the content is instantly visible in the text area (ie without filtering).
 
@@ -20,7 +20,7 @@ Snippet Name
 sweety
 
 Snippet
-My sweet food on @@weekday@@ is: @@mysweety@@
+My sweet food on {{weekday}} is: {{mysweety}}
 
 Defaults
 mysweety=candy,weekday=Monday

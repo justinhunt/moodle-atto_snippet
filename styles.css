@@ -16,3 +16,12 @@
 div.atto_snippet_dragging {
    border:2px dashed #0000FF;
 }
+
+
+.atto_snippet_field{
+	width: 200px;
+}
+div.atto_snippet_buttons {
+    display: inline-block;
+    margin: 5px;
+}
