@@ -44,7 +44,15 @@ public static function fetch_general_items($conf){
 				get_string('snippetcount', 'atto_snippet'),
 				get_string('snippetcount_desc', 'atto_snippet'), 
 				 self::ATTO_SNIPPET_SNIPPET_COUNT, PARAM_INT,20);
-	return $items;
+
+    //template show in atto editor
+    $yesno = array('0'=>get_string('no'),'1'=>get_string('yes'));
+    $items[]=new \admin_setting_configselect('atto_snippet/loadfromtheme',
+        get_string('loadfromtheme', 'atto_snippet'),
+        get_string('loadfromtheme_desc', 'atto_snippet'),
+        1,$yesno);
+
+    return $items;
 
 }//end of function fetch widget items
 

@@ -1,7 +1,8 @@
 Version 2017040101
 -Fixed bug with snippet count not being recognised
 -Fixed appearance of snippets in admin settings on Boost theme
--Added support for picking up snippets from theme
+-Added support for picking up snippets from theme in the presets dropdown
+-Added support for automatically displaying theme snippets in atto
 -Set minimum supported Moodle version to Moodle 2.7
 
 Version 2016121401

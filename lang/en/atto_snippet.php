@@ -48,5 +48,8 @@ $string['presets_desc'] = '';
 $string['snippetpageheading'] = '{$a}';
 $string['generalsettings'] = 'General settings';
 $string['snippets'] = 'Snippets';
-
+$string['loadfromtheme'] ='Load snippets from theme';
+$string['loadfromtheme_desc'] ='Some Moodle themes ship with their own snippet presets. If this setting is set to "yes" then theme snippets will ' .
+    'automatically appear in the Atto snippet dialog. Theme snippet presets can be applied from the ' .
+    'dropdown box on the snippet settings page regardless of this setting ';
 

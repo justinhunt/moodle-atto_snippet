@@ -80,6 +80,20 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
 		$allinstructions[] = rawurlencode($snippets['snippetinstructions_' . $snippetindex]);
     }
 
+    //fetch any snippet from the theme and also display those
+    //the admin can disable this via the loadfromtheme setting on the snippet general settings page
+    if($conf->loadfromtheme) {
+        $themeonly = true;
+        $themepresets = \atto_snippet\snippetpresets::fetch_presets($themeonly);
+        foreach ($themepresets as $preset) {
+            $allsnippets[] = $preset['body'];
+            $allsnippetnames[] = $preset['name'];
+            $allvariables[] = atto_snippet_fetch_variables($preset['body']);
+            $alldefaults[] = atto_snippet_fetch_default_properties($preset['defaults']);
+            $allinstructions[] = rawurlencode($preset['instructions']);
+        }
+    }
+
 	//If they don't have permission don't show it
 	$disabled = false;
 	if(!has_capability('atto/snippet:visible', $coursecontext) ){
