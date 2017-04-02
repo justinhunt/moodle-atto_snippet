@@ -30,45 +30,38 @@ if (is_siteadmin()) {
 
 	$conf = get_config('atto_snippet');
 
-	$ADMIN->add('editoratto', new admin_category('atto_snippet', new lang_string('pluginname', 'atto_snippet')));
+    //use this to put it all in a category
+	$atto_category='atto_snippet';
+    $ADMIN->add('editoratto', new admin_category($atto_category, new lang_string('pluginname', 'atto_snippet')));
+
+    //use this to put it all on one page
+   // $atto_category='editoratto';
 
 
-		//General settings
-		$general_settings = new admin_settingpage('atto_snippet_general',get_string('generalsettings', 'atto_snippet'));
-		$general_items =  \atto_snippet\settingstools::fetch_general_items($conf);
-		foreach ($general_items as $general_item) {
-			$general_settings->add($general_item);
-		}
-		$ADMIN->add('atto_snippet', $general_settings);
-	
-		//Snippet
-		$snippet_category = new admin_category('atto_snippet_snippetcat', 'Snippets');
-		$ADMIN->add('atto_snippet', $snippet_category);
-		$snippet_pages =  \atto_snippet\settingstools::fetch_snippet_pages($conf);
-		foreach ($snippet_pages as $snippet_page) {
-			$ADMIN->add('atto_snippet_snippetcat', $snippet_page);
-		}
+    //General settings
+    $general_settings = new admin_settingpage('atto_snippet_settings',get_string('pluginname', 'atto_snippet'));
 
-	/*
-	$settings = new admin_settingpage('atto_snippet_settings', new lang_string('settings', 'atto_snippet'));
-	if ($ADMIN->fulltree) {
-		// An option setting
-		for($i=1;$i<ATTO_SNIPPET_COUNT+1;$i++){
-			$settings->add(new admin_setting_heading('atto_snippet/snippetheading_' . $i, 
-				get_string('snippet', 'atto_snippet') . ' ' . $i, ''));
-			$settings->add(new admin_setting_configtext('atto_snippet/snippetname_' . $i,
-				get_string('snippetname', 'atto_snippet') . ' ' . $i , '', '', PARAM_RAW));
-			$settings->add(new admin_setting_configtext('atto_snippet/snippetkey_' . $i,
-				get_string('snippetkey', 'atto_snippet') . ' ' . $i , '', '', PARAM_TEXT));
-			$settings->add(new admin_setting_configtextarea('atto_snippet/snippetinstructions_' . $i,
-				get_string('snippetinstructions', 'atto_snippet'), '', '', PARAM_RAW));
-			$settings->add(new admin_setting_configtextarea('atto_snippet/snippet_' . $i,
-				get_string('snippet', 'atto_snippet'), '', '', PARAM_RAW));
-			$settings->add(new admin_setting_configtextarea('atto_snippet/defaults_' . $i,
-				get_string('defaults', 'atto_snippet'), '', '', PARAM_RAW));
-			$settings->add(new admin_setting_configtext('atto_snippet/snippetversion_' . $i,
-				get_string('snippetversion', 'atto_snippet') . ' ' . $i , '', '', PARAM_TEXT));
-		}
-	}
-	*/
+    //add basic items to page, snippet count really
+    $general_items =  \atto_snippet\settingstools::fetch_general_items($conf);
+    foreach ($general_items as $general_item) {
+        $general_settings->add($general_item);
+    }
+
+    //add table of templates to page
+    $snippettable_item =  new \atto_snippet\snippettable('atto_snippet/snippettable',
+    get_string('snippets', 'atto_snippet'), '');
+    $general_settings->add($snippettable_item);
+
+    //add page to category
+    $ADMIN->add($atto_category,$general_settings);
+
+    //add Snippets pages to category (hidden from nav)
+    $snippet_pages =  \atto_snippet\settingstools::fetch_snippet_pages($conf);
+    foreach ($snippet_pages as $snippet_page) {
+        $ADMIN->add($atto_category, $snippet_page);
+    }
+
+    //set the default return to null
+    $settings=null;
+
 }//end of if site admin

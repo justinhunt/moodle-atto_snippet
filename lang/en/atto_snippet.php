@@ -47,5 +47,6 @@ $string['presets'] = 'Presets';
 $string['presets_desc'] = '';
 $string['snippetpageheading'] = '{$a}';
 $string['generalsettings'] = 'General settings';
+$string['snippets'] = 'Snippets';
 
 

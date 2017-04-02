@@ -48,6 +48,22 @@ public static function fetch_general_items($conf){
 
 }//end of function fetch widget items
 
+    //make a readable snippet name for menus and lists etc
+    public static function fetch_snippet_title($conf,$tindex){
+        //snippet display name
+        $tname='';
+        if($conf && property_exists($conf,'snippetname_' . $tindex)){
+            $tname = $conf->{'snippetname_' . $tindex};
+        }
+        if(empty($tname) && $conf && property_exists($conf,'snippetkey_' . $tindex)){
+            $tname = $conf->{'snippetkey_' . $tindex};
+        }
+        if(empty($tname)){$tname=$tindex;}
+        $snippettitle = get_string('snippetpageheading', 'atto_snippet',$tname);
+
+        return $snippettitle;
+    }
+
 public static function fetch_snippet_pages($conf){
 		$pages = array();
 
@@ -75,7 +91,7 @@ public static function fetch_snippet_pages($conf){
 			$snippettitle = get_string('snippetpageheading', 'atto_snippet',$sname);
 		 
 			 //snippet settings Page Settings 
-			$settings_page = new \admin_settingpage('atto_snippet_snippetpage_' . $sindex,$snippettitle);
+			$settings_page = new \admin_settingpage('atto_snippet_snippetpage_' . $sindex,$snippettitle,'moodle/site:config',true);
                    
 
 			$settings_page->add(new \admin_setting_heading('atto_snippet/snippetheading_' . $sindex, 

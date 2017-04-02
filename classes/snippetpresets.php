@@ -135,19 +135,32 @@ class snippetpresets extends \admin_setting {
         }//end of parse preset template
 
 
-        public static function fetch_presets(){          
-            global $CFG;
-			$ret = array();
-                        $dir = new \DirectoryIterator($CFG->dirroot . '/lib/editor/atto/plugins/snippet/presets');
-                        foreach($dir as $fileinfo){
-                            if(!$fileinfo->isDot()){
-                              $preset = self::parse_preset_template($fileinfo);
-                              if($preset){
-                                $ret[]=$preset;
-                              }
-                            }
+        public static function fetch_presets(){
+            global $CFG,$PAGE;
+			//init return array
+            $ret = array();
+            $dirs=array();
+
+            //we search the snippets "presets" and the themes "snippet" folders for presets
+            $snippet_presets_dir=$CFG->dirroot . '/lib/editor/atto/plugins/snippet/presets';
+            $theme_snippets_dir=$PAGE->theme->dir . '/snippet';
+            if(file_exists($snippet_presets_dir)) {
+                $dirs[] = new \DirectoryIterator($snippet_presets_dir);
+            }
+            if(file_exists($theme_snippets_dir)) {
+                $dirs[] = new \DirectoryIterator($theme_snippets_dir);
+            }
+            foreach($dirs as $dir) {
+                foreach ($dir as $fileinfo) {
+                    if (!$fileinfo->isDot()) {
+                        $preset = self::parse_preset_template($fileinfo);
+                        if ($preset) {
+                            $ret[] = $preset;
                         }
-                       return $ret;
+                    }
+                }
+            }
+           return $ret;
 		}//end of fetch presets function
 				
 		public static function set_preset_to_config($preset, $templateindex){

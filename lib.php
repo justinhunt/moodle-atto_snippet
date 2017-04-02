@@ -24,8 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-define('ATTO_SNIPPET_COUNT', 20);
-
 
 /**
  * Initialise this plugin
@@ -56,14 +54,22 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
 	//snippet specific
     //this has to be established. It will basically be an array of regular expressions
     //each with a title.
-	$snippets = get_object_vars(get_config('atto_snippet'));
+    $conf=get_config('atto_snippet');
+	$snippets = get_object_vars($conf);
     $allsnippets=array();
     $allsnippetnames=array();
     $allvariables = array();
     $allinstructions = array();
 
+    //Get the snippet count
+     if($conf && property_exists($conf,'snippetcount')){
+            $snippetcount = $conf->snippetcount;
+        }else{
+            $snippetcount = \atto_snippet\settingstools::ATTO_SNIPPET_SNIPPET_COUNT;
+        }
+
     //put our template into a form thats easy to process in JS
-    for($snippetindex=1;$snippetindex<ATTO_SNIPPET_COUNT+1;$snippetindex++) {
+    for($snippetindex=1;$snippetindex<$snippetcount+1;$snippetindex++) {
         if (empty($snippets['snippet_' . $snippetindex])) {
             continue;
         }
