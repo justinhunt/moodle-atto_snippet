@@ -141,7 +141,8 @@ function atto_snippet_fetch_variables($snippet){
 		}
 		return($retmatches);
 		*/
-		return $matches[1];
+        $uniquearray= array_unique($matches[1]);
+		return array_values($uniquearray);
 	}else{
 		return array();
 	}

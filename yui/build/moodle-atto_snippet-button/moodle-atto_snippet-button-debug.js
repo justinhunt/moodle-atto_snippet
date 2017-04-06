@@ -364,7 +364,8 @@ Y.namespace('M.atto_snippet').Button = Y.Base.create('button', Y.M.editor_atto.E
          Y.Array.each(thevariables, function(variable, currentindex) {
         	var thefield = Y.one('.' + CSS.TEMPLATEVARIABLE + '_' + currentindex);
         	var thevalue = thefield.get('value');
-        	retstring = retstring.replace('{{' + variable + '}}',thevalue);
+        	//retstring = retstring.replace('{{' + variable + '}}',thevalue);
+             retstring = retstring.replace(new RegExp('{{' + variable + '}}', 'g'),thevalue);
         }, this);
         retcontent = retstring;
  
