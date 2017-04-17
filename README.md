@@ -46,5 +46,8 @@ site admin -> plugins -> text editors -> atto -> Snippet(atto) -> General Settin
 ## Presets
 There is a dropdown list of presets at the top of each snippet settings page. These will fill the template page in with the details of a preset template. You can make your own presets and share them too. To do this you can export the template by mouse clicking on the green "bundle" box on the top right of the template settings page. It will download as a .txt file. Drag an exported .txt file over the green bundle box on a blank template settings page to import it.
 
-
 If you wish your exported template to appear in the presets dropdown you must place the .txt file in the presets folder under /lib/editor/atto/plugins/snippet. Or in a folder called "snippet" in your theme.
+
+
+## See also
+ Mark Sharp's [templates](https://github.com/sharpchi/moodle-atto_templates) plugin
