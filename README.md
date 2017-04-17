@@ -1,5 +1,5 @@
 
-Snippet is a template solution for Moodle content creation. Templates and variables(placeholders) are declared in the admin settings for the plugin. When the icon is click on the Atto editor, the user can choose the template and the values for each of the variables. The placeholders and template are then merged to create the final content which is then inserted on the page.
+Snippet is a template solution for Moodle content creation. Templates and variables(placeholders) are declared in the admin settings for the plugin. When the icon is clicked on the Atto editor, the user can choose the template and enter/select values for each of the variables. The placeholders and template are then merged to create the final content which is inserted on the page.
 
 Snippet has no filter plugin companion. It returns html directly to the text area. This is useful when the content doesn't need javascript, and has the benefit that the content is instantly visible and editable in the text area (ie without filtering). As an example of this, the Youtube template will display a Youtube video in the html editor text area immediately.
 
