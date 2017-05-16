@@ -1,3 +1,6 @@
+Version 2017051601
+-Removed concatenation operator from lang strings so that AMOS could access it.
+
 Version 2017040101
 -Fixed bug with snippet count not being recognised
 -Fixed appearance of snippets in admin settings on Boost theme
