@@ -48,6 +48,8 @@ There is a dropdown list of presets at the top of each snippet settings page. Th
 
 If you wish your exported template to appear in the presets dropdown you must place the .txt file in the presets folder under /lib/editor/atto/plugins/snippet. Or in a folder called "snippet" in your theme.
 
+##For Theme Developers
+It is possible to distribute snippets with your theme. Create a folder called "snippet" in the root folder of your theme and place your template bundle files in there. Your theme snippets will then appear in the drop down list of presets on each blank snippet template settings page. 
 
 ## See also
  Mark Sharp's [templates](https://github.com/sharpchi/moodle-atto_templates) plugin
