@@ -51,3 +51,4 @@ $string['snippets'] = 'Snippets';
 $string['loadfromtheme'] ='Load snippets from theme';
 $string['loadfromtheme_desc'] ='Some Moodle themes ship with their own snippet presets. If this setting is set to "yes" then theme snippets will automatically appear in the Atto snippet dialog. Theme snippet presets can be applied from the dropdown box on the snippet settings page regardless of this setting ';
 $string['privacy:metadata'] = 'The Atto Snippet plugin does not store any personal data.';
+$string['snippet:visible'] = 'Can see Atto Snippet on toolbar';
