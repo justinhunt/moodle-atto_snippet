@@ -1,3 +1,6 @@
+Version 1.1.1 (Build 2024100700)
+- Tweaks for PHP 8.2 and 8.3
+
 Version 1.1.0(Build 2018041000)
 -Implemented new Moodle Privacy API
 

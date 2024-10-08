@@ -59,6 +59,7 @@ function atto_snippet_params_for_js($elementid, $options, $fpoptions) {
     $allsnippets=array();
     $allsnippetnames=array();
     $allvariables = array();
+	$alldefaults = array();
     $allinstructions = array();
 
     //Get the snippet count
